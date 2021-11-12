@@ -18,6 +18,7 @@ pipeline {
         sh "apk add mongodb yaml-cpp=0.6.2-r2"
         sh "chmod +x ./scripts/dropdb.sh"
         sh "mongo -version"
+        sh "npm install"
       }
     }
     stage("Test"){
@@ -26,7 +27,7 @@ pipeline {
       }
       post {    //mesmo que falhe o teste ou não o método post envia 
         always { // always vai enviar SEMPRE
-          junit "*.xml"  // plugin junit já vem por padrão no jenkins, esse comando ele lé a pasta log e publica o resultado no jenkins
+          junit "log/*.xml"  // plugin junit já vem por padrão no jenkins, esse comando ele lé a pasta log e publica o resultado no jenkins
         }
       }
     }
