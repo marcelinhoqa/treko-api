@@ -8,6 +8,9 @@ pipeline {
   stages {
     stage("Build"){
       steps {
+         /*  Por mais que o servidor seja linux, não é possível executar como apt-get install mongodb
+         por ser uma distribuição do node:alpine é necessário executar como  sh apk add --no-cache mongodb    -- no cache pra não pegar cache */
+        
         sh "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.9/main' >> /etc/apk/repositories"
         sh "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.9/community' >> /etc/apk/repositories"
         sh "apk upgrade --update"
@@ -21,9 +24,9 @@ pipeline {
       steps {
         sh "npm run test:ci"
       }
-      post {
-        always {
-          junit "log/*.xml"
+      post {    //mesmo que falhe o teste ou não o método post envia 
+        always { // always vai enviar SEMPRE
+          junit "log/*.xml"  // plugin junit já vem por padrão no jenkins
         }
       }
     }
