@@ -82,33 +82,4 @@ describe('post', () => {
         })
     })
 
-    context('quando a tarefa já existe', () => {
-
-        let task = { title: 'Planejar viagem para a China', owner: 'eu@papito.io', done: false }
-
-        before((done) => {
-            request
-                .post('/task')
-                .send(task)
-                .end((err, res) => {
-                    expect(res).to.has.status(200)
-                    done()
-                })
-        })
-
-        it('deve retornar 409', (done) => {
-            request
-                .post('/task')
-                .send(task)
-                .end((err, res) => {
-                    expect(res).to.has.status(409)
-                    expect(res.body.errmsg).to.include('duplicate key')
-                    done()
-                })
-        })
-
-
-    })
-
-
 })
