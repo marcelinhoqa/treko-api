@@ -7,8 +7,6 @@ pipeline {
   stages {
     stage("Build"){
       steps {
-        /*  Por mais que o servidor seja linux, não é possível executar como apt-get install mongodb
-         por ser uma distribuição do node:alpine é necessário executar como  sh apk add --no-cache mongodb    -- no cache pra não pegar cache */
         sh "apk add --no-cache mongodb" 
         sh "chmod +x ./scripts/dropdb.sh"
         sh "npm install"
