@@ -26,7 +26,7 @@ pipeline {
       }
       post {    //mesmo que falhe o teste ou não o método post envia 
         always { // always vai enviar SEMPRE
-          junit "log/*.xml"  // plugin junit já vem por padrão no jenkins, esse comando ele lé a pasta log e publica o resultado no jenkins
+          junit "log/report.xml"  // plugin junit já vem por padrão no jenkins, esse comando ele lé a pasta log e publica o resultado no jenkins
         }
       }
     }
